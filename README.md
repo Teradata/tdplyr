@@ -49,7 +49,8 @@ R: (64 bit only)
 
 Teradata Vantage:
 - Vantage 1.0 - Maintenance Update 2 or later versions
-- Teradata Machine Learning Engine 08.00.03.01
+- NewSQL Engine 16.20 Feature Update 1 or later versions
+- Teradata Machine Learning Engine 08.00.03.00 or later versions
  
 Supported Drivers:
 - Teradata SQL Driver for R 16.20.0.18 (Recommended)
@@ -63,6 +64,13 @@ Operating Systems: (64-bit only)
 - SLES/OpenSUSE 12
 
 ## Change Log
+
+#### tdplyr 16.20.00.04
+- Added 4 new SQLEngine analytic functions, which will work only with Vantage 1.1.
+    - td_antiselect_sqle
+    - td_pack_sqle
+    - td_string_similarity_sqle
+    - td_unpack_sqle
 
 #### tdplyr 16.20.00.03
 - Support for Teradata SQL driver for R has been added. Teradata recommends to use Teradata SQL driver for R with tdplyr. 
