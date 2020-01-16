@@ -32,7 +32,7 @@ General product information is available in the [Teradata Documentation website]
 The Teradata R package (tdplyr) contains proprietary code and cannot be offered on CRAN. It is available from Teradata's 
 R package repository. 
 
-The Teradata R package depends on the dplyr, dbplyr, DBI, magrittr and teradatasql packages which are available from
+The Teradata R package depends on the rlang, dplyr, dbplyr, DBI, magrittr and teradatasql packages which are available from
 CRAN and Teradata's R package repository.
 
 To download and install dependencies automatically, specify the Teradata R package repository and CRAN in the 
@@ -53,7 +53,7 @@ Teradata Vantage:
 - Teradata Machine Learning Engine 08.00.03.00 or later versions
  
 Supported Drivers:
-- Teradata SQL Driver for R 16.20.0.18 (Recommended)
+- Teradata SQL Driver for R v16.20.0.34 (Recommended) or later versions
 - Teradata ODBC Driver 16.20 (Deprecated)
  
 Operating Systems: (64-bit only)
@@ -65,12 +65,45 @@ Operating Systems: (64-bit only)
 
 ## Change Log
 
+#### tdplyr 16.20.00.05
+- Improvements
+    - Improved performance when using output of analytic functions as input to dplyr verbs or `copy_to`.
+    - Support added to load time series Primary Time Index (PTI) tables using `copy_to()`.
+    - Added more examples and updated documentation for some APIs.
+- New features/functions
+    - tdplyr in conjunction with Teradata SQL Driver for R supports integration with RStudio Connections Pane for exploring the data source once connection is established with Vantage. Please refer the [link](https://db.rstudio.com/rstudio/connections/) for more information about RStudio Connection Pane.
+    - `td_fastload()` - for high performance data loading of large amount of data into a table in Teradata Vantage.
+    - `td_sample()` - to sample proportion of data.
+    - Time series functions
+        - `group_by_time()` - to group tbl_terdata object based on time.
+        - Time series aggregate functions - to perform aggregate operations on time series tbl_teradata objects grouped by time. Please refer the vignette `time_series_aggregates` for usage.
+            - `ts.bottom()`
+            - `ts.top()`
+            - `ts.first()`
+            - `ts.last()`
+            - `ts.mad()`
+            - `ts.median()`
+            - `ts.mode()`
+    - `summarise()` - to summarise the tbl_teradata object using both regular and time series aggregate operations.
+    - Added a new SQL translation function `as.Date()` which typecasts character data type column to SQL DATE data type column. Please refer the vignette `sql-translation` for usage.
+    - Added 10 new MLEngine analytic functions.
+        - `td_adaboost_mle`
+        - `td_adaboost_predict_mle`
+        - `td_glml1l2_mle`
+        - `td_glml1l2_predict_mle`
+        - `td_pos_tagger_mle`
+        - `td_text_chunker_mle`
+        - `td_text_classifier_evaluator_mle`
+        - `td_text_classifier_mle`
+        - `td_text_classifier_trainer_mle`
+        - `td_text_morph_mle`
+
 #### tdplyr 16.20.00.04
 - Added 4 new SQLEngine analytic functions, which will work only with Vantage 1.1.
-    - td_antiselect_sqle
-    - td_pack_sqle
-    - td_string_similarity_sqle
-    - td_unpack_sqle
+    - `td_antiselect_sqle`
+    - `td_pack_sqle`
+    - `td_string_similarity_sqle`
+    - `td_unpack_sqle`
 
 #### tdplyr 16.20.00.03
 - Support for Teradata SQL driver for R has been added. Teradata recommends to use Teradata SQL driver for R with tdplyr. 
@@ -78,10 +111,10 @@ Operating Systems: (64-bit only)
 - Support added to td_create_context(connect to Teradata Vantage) to support different logon mechanisms with Teradata SQL Driver. Logon mechanisms supported are: TD2, LDAP, TDNEGO, KRB5(for Kerberos).
 - 11 new analytic function (9 for MLEngine and 2 for SQLEngine) wrappers have been added.
 - Below ML Engine analytic functions have new arguments added and the new arguments will work only with Teradata Vantage 1.1 or later releases.
-    - td_decision_forest_mle
-    - td_decision_tree_mle
-    - td_knn_mle
-    - td_varmax_mle
+    - `td_decision_forest_mle`
+    - `td_decision_tree_mle`
+    - `td_knn_mle`
+    - `td_varmax_mle`
 
 
 #### tdplyr 16.20.00.02
