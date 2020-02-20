@@ -65,6 +65,22 @@ Operating Systems: (64-bit only)
 
 ## Change Log
 
+#### tdplyr 16.20.00.06
+- Compatible with Vantage 1.1.1.\
+The following ML Engine functions have new and/or updated arguments to support the Vantage version:
+    - `td_adaboost_predict_mle()`
+    - `td_decision_forest_predict_mle()`
+    - `td_decision_tree_predict_mle()`
+    - `td_glm_predict_mle()`
+    - `td_lda_mle()`
+    - `td_naivebayes_predict_mle()`
+    - `td_naivebayes_textclassifier_predict_mle()`
+    - `td_svm_dense_predict_mle()`
+    - `td_svm_sparse_mle()`
+    - `td_svm_sparse_predict_mle()`
+    - `td_xgboost_predict_mle()`
+- Added support to use generic predict function for `td_adaboost_predict_mle()`. Now `td_adaboost_predict_mle` can be called using `predict(<td_adaboost_mle_obj>, ...)`.
+
 #### tdplyr 16.20.00.05
 - Improvements
     - Improved performance when using output of analytic functions as input to dplyr verbs or `copy_to`.
