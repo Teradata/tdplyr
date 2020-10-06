@@ -32,8 +32,8 @@ General product information is available in the [Teradata Documentation website]
 The Teradata R package (tdplyr) contains proprietary code and cannot be offered on CRAN. It is available from Teradata's 
 R package repository. 
 
-The Teradata R package depends on the rlang, dplyr, dbplyr, DBI, magrittr and teradatasql packages which are available from
-CRAN and Teradata's R package repository.
+The Teradata R package depends on `rlang`, `dplyr`, `dbplyr`, `DBI`, `magrittr`, `jsonlite`, `purrr`, `bit64` and `teradatasql`
+packages which are available from CRAN or Teradata's R package repository.
 
 To download and install dependencies automatically, specify the Teradata R package repository and CRAN in the 
 `repos` argument for `install.packages`.
@@ -53,7 +53,7 @@ Teradata Vantage:
 - Teradata Machine Learning Engine 08.00.03.00 or later versions
  
 Supported Drivers:
-- Teradata SQL Driver for R v16.20.0.34 (Recommended) or later versions
+- Teradata SQL Driver for R 17.0.0.4 (Recommended) or later versions
 - Teradata ODBC Driver 16.20 (Deprecated)
  
 Operating Systems: (64-bit only)
@@ -64,6 +64,56 @@ Operating Systems: (64-bit only)
 - SLES/OpenSUSE 12
 
 ## Change Log
+
+#### tdplyr 17.00.00.00
+- New Features/Functions
+    - Model Cataloging - Functionality to catalog model metadata and related information in the Model Catalog.
+        - `td_save_model()` - Save a tdplyr analytic function model.
+        - `td_retrieve_model()` - Retrieve a saved model.
+        - `td_list_models()` - List accessible models.
+        - `td_describe_model()` - List the details of a model.
+        - `td_delete_model()` - Remove a model from Model Catalog.
+        - `td_publish_model()` - Share a model.
+    - Script - An interface to run user scripts in Advanced SQL Engine using Teradata's Script Table Operator (STO).
+        - `Script()` - Creates and initializes an object of "ScriptTableOperator" class.
+        - The following functions enable the user to run user scripts locally in a containerized enviroment:
+            - `td_setup_test_env()` - Setup up the test environment.
+            - `td_test_script()` - Test user script in containerized environment.
+            - `td_set_data()` - Update/set test data parameters.
+        - The following functions enable the user to run user scripts in Advanced SQL Engine:
+            - `td_execute_script()` - Execute user script in Vantage.
+            - `td_set_data()` - Update/set test data parameters.
+    - Vantage File Management Functions
+        - `td_install_file()` - Install or replace file in Vantage.
+        - `td_remove_file()` - Remove an installed file from Vantage.
+    - Time series aggregate functions - Added new SQL translations to support the following time series aggregate functions. Please refer the vignette `time_series_aggregates` for the usage of all time series aggregate functions.
+        - `ts.perentile()` - Calculate the nth percentile value of a column.
+        - `ts.delta_t()` - Calculate the time difference (i.e, DELTA_T) between starting and ending events.
+        - `ts.kurtosis()` - Calculate the kurtosis value of a column.
+        - `ts.skew()` - Measure the skewness of the distribution of a column.
+        - `ts.sum()` - Calculate the sum of values in the column.
+        - `ts.sd()` - Calculate the sample standard deviation of a column.
+        - `ts.sdp()` - Calculate the population standard deviation of a column.
+        - `ts.var()` - Calculate the sample variance of a column.
+        - `ts.varp()` - Calculate the population variance of a column.
+        - `ts.min()` - Calculate the minimum value of a column.
+        - `ts.max()` - Calculate the maximum value of a column.
+        - `ts.mean()` - Calculate the average value of a column.
+        - `ts.n()` - Calculate the count of qualified rows in a column.
+        - `ts.describe()` - Calculate the statistics of a column.
+    - Regular aggregate functions - Added new SQL translations to support the following regular aggregate functions. Please refer the vignette `regular_aggregates` for the usage of all regular aggregate functions.
+        - `kurtosis()` - Calculate the kurtosis value of a column.
+        - `skew()` - Measure the skewness of the distribution of a column.
+        - `n()` - Calculate the count of qualified rows in a column. This dbplyr SQL aggregate function is overwritten to take a column name, with default value as "*" and builds a SQL expression to return count value of type `bit64::integer64`.
+        - `n_distinct()` - This SQL aggregate function is updated to return count value of type `bit64::integer64`.
+    - Window aggregate functions - Added new SQL translations to support the following window aggregate function. Please refer the vignette `sql-translation` for the usage of all window aggregate functions.
+        - `n()` - Calculate the count of qualified rows in a column. This dbplyr SQL aggregate function is overwritten to take a column name, with default value as "*" and builds a SQL expression to return count value of type `bit64::integer64`.
+- Updates/Improvements
+    - Support added for Stored Password Protection feature. Please refer to the documentation and examples of `td_create_context()` function.
+    - Support added in `td_create_context()` to connect to Teradata Vantage using JWT logon mechanism.
+    - Using `DBI::dbConnect(tdplyr::NativeDriver(), ...)` creates context unlike earlier releases. To create connection using Teradata SQL Driver for R, please refer the documentation [here](https://github.com/Teradata/r-driver#using-the-teradata-sql-driver-for-r).
+    - Updated the way `td_set_context()` works based on the type of the connection object.
+    - The `td_nrow()` function returns the count of the rows in tbl_teradata as `bit64::integer64` type.
 
 #### tdplyr 16.20.00.06
 - Compatible with Vantage 1.1.1.\
