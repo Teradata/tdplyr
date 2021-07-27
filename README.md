@@ -12,8 +12,8 @@ This package interface makes available to R users a collection of functions for 
 Vantage, so that they can perform in-database analytics with no SQL coding required. Specifically, the
 Teradata R package provides functions for data manipulation and transformation, data filtering and sub-setting,
 on remote Teradata database table and can be used in conjunction with open source R capabilities. Moreover, 
-the Teradata R package conforms and works with the functions of the [dbplyr](https://cran.r-project.org/web/packages/dbplyr/index.html) package and most of the verbs of 
-the [dplyr](https://cran.r-project.org/web/packages/dplyr/index.html) package.
+the Teradata R package conforms and works with the functions of the [dbplyr](https://cran.r-project.org/web/packages/dbplyr/index.html) package and 
+most of the verbs of the [dplyr](https://cran.r-project.org/web/packages/dplyr/index.html) package.
 
 Teradata Vantage Client R Analytic library  
 Copyright © 2018, Teradata. All Rights Reserved.
@@ -35,14 +35,7 @@ R package repository.
 The Teradata R package depends on `rlang`, `dplyr`, `dbplyr`, `DBI`, `magrittr`, `jsonlite`, `purrr`, `bit64` and `teradatasql`
 packages which are available from CRAN or Teradata's R package repository.
 
-The Teradata R package is incompatible with `dbplyr` v2.0.0 and its later versions, which introduced some breaking changes. To use tdplyr, the version of `dbplyr` package must be v1.4.4. tdplyr should be installed using the following commands from your Terminal (for Linux and Mac) or Command Prompt (for Windows), till a new version that is compatible with `dbplyr` v2.0.0 and its later versions is released:
-- Install dbplyr v1.4.4 first. There are various ways to install a specific version of a R package. Teradata recommends using the following command:
-```
-Rscript -e "remotes::install_version('dbplyr',version='1.4.4',repos='https://cloud.r-project.org')"
-```
-Note: To run this above command, the R package `remotes` should be present on the client machine.
-
-- Next to download and install tdplyr and dependencies automatically, if minimum required versions are not met, specify the Teradata R package repository and CRAN in the repos argument for install.packages.
+To download and install tdplyr along with its dependencies automatically, specify the Teradata R package repository and CRAN in the repos argument for `install.packages`.
 ```
 Rscript -e "install.packages('tdplyr',repos=c('https://teradata-download.s3.amazonaws.com','https://cloud.r-project.org'))"
 ```
@@ -54,12 +47,12 @@ R: (64 bit only)
 
 Teradata Vantage:
 - Vantage 1.0 - Maintenance Update 2 or later versions
-- NewSQL Engine 16.20 Feature Update 1 or later versions
+- Advanced SQL (was NewSQL) Engine 16.20 Feature Update 1 or later versions
 - Teradata Machine Learning Engine 08.00.03.00 or later versions
  
 Supported Drivers:
-- Teradata SQL Driver for R 17.0.0.4 (Recommended) or later versions
-- Teradata ODBC Driver 16.20 (Deprecated)
+- Teradata SQL Driver for R 17.0.0.8 (Recommended) or later versions
+- Teradata ODBC Driver (Deprecated)
  
 Operating Systems: (64-bit only)
 - Windows 7
@@ -70,7 +63,100 @@ Operating Systems: (64-bit only)
 
 ## Change Log
 
-#### tdplyr 17.00.00.00
+#### tdplyr 17.0.0.1
+- Important Notification:
+  Minimum dbplyr version required is 2.0. tdplyr has been updated to support dbplyr version 2.0 or later.
+- New Features/Functions
+    - Bring Your Own Models (BYOM): Vignette also available with scoring examples
+        - `td_pmml_predict()`
+    - Data Export: Added support for FastExport
+        - `td_fastexport()`
+    - Vantage Analytic Library (VAL) Functions:
+        - Association Rules
+            - `td_association_valib()`
+        - Decision Tree
+            - `td_decision_tree_valib()`
+            - `td_decision_tree_evaluator_valib()`
+            - `td_decision_tree_predict_valib()`
+        - Descriptive Statistics
+            - `td_adaptive_histogram_valib()`
+            - `td_explore_valib()`
+            - `td_frequency_valib()`
+            - `td_histogram_valib()`
+            - `td_overlap_valib()`
+            - `td_statistics_valib()`
+            - `td_text_analyzer_valib()`
+            - `td_values_valib()`
+        - Factor Analysis
+            - `td_pca_valib()`
+            - `td_pca_evaluator_valib()`
+            - `td_pca_predict_valib()`
+        - Fast KMeans Clustering
+            - `td_kmeans_valib()`
+            - `td_kmeans_predict_valib()`
+        - Linear Regression
+            - `td_lin_reg_valib()`
+            - `td_lin_reg_evaluator_valib()`
+            - `td_lin_reg_predict_valib()`
+        - Logistic Regression
+            - `td_log_reg_valib()`
+            - `td_log_reg_evaluator_valib()`
+            - `td_log_reg_predict_valib()`
+        - Matrix Building
+            - `td_matrix_valib()`
+        - Statistical Tests
+            - `td_binomial_test_valib()`
+            - `td_chi_square_test_valib()`
+            - `td_ks_test_valib()`
+            - `td_parametric_test_valib()`
+            - `td_rank_test_valib()`
+        - Reports
+            - `td_xml_to_html_report_valib()`
+        - Variable Transformation
+            - `td_transform_valib()`
+            - Transformation Techniques to use with 'Transform'
+                - `tdBinning()`
+                - `tdDerive()`
+                - `tdFillNa()`
+                - `tdLabelEncoder()`
+                - `tdMinMaxScalar()`
+                - `tdOneHotEncoder()`
+                - `tdRetain()`
+                - `tdSigmoid()`
+                - `tdZScore()`
+        - Supporting Utilies/Functionality
+            - S3 Generic: `print()` - Allows user to print the output of any of the VAL function.
+            - View Underlying SQL:
+                - `show_query()` - Allows user to print the underlying SQL used 
+                  for function execution using the output object.
+                - Option `print.val.query` allows user to print the SQL while
+                  the VAL function is running. This can be used for debugging 
+                  purpose.
+    - Sandbox Container Utility Functions
+        - `td_cleanup_sandbox_env()`
+        - `td_copy_files_from_container()`
+        - `td_setup_sandbox_env()`
+- Updates/Improvements
+    - Newly added tdplyr options:
+        - tdplyr has added two new options that provide flexibility to the user
+          to control which database must be used to create tables and views,
+          generated by the tdplyr APIs, which are garbage collected at the end 
+          of the session.
+          Following are the two options:
+            - `temp.table.database.name` - 
+              Specifies the database to create tables into.
+            - `temp.view.database.name` - 
+              Specifies the database to create views into.
+          These options allow user to set the output database without 
+          re-creating context.
+    - `td_test_script()`
+        - Function now also allows testing on local client, i.e., outside of
+          sandbox environment, in addition to existing node of sandbox testing.
+        - Function `td_setup_test_env()` is deprecated now. Use newly added
+          sandbox container utility function `td_setup_sandbox_env()` instead.
+
+
+#### tdplyr 17.0.0.0
 - New Features/Functions
     - Model Cataloging - Functionality to catalog model metadata and related information in the Model Catalog.
         - `td_save_model()` - Save a tdplyr analytic function model.
