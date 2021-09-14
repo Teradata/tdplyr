@@ -20,7 +20,7 @@ Copyright © 2018, Teradata. All Rights Reserved.
 
 For Teradata R package documentation, please visit [Teradata R Package Documentation](https://docs.teradata.com/search/books?filters=prodname~%2522Teradata+R+Package%2522)
 
-For Teradata customer support, please visit [Teradata Access](https://access.teradata.com)
+For Teradata customer support, please visit [Teradata Access](https://access.teradata.com) or email Analytic-Clients Support at <SA230577@teradata.com>.
 
 General product information is available in the [Teradata Documentation website](https://docs.teradata.com/)
 - Teradata R Package User Guide – B700-4005 
