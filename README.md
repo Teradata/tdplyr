@@ -37,7 +37,7 @@ packages which are available from CRAN or Teradata's R package repository.
 
 To download and install tdplyr along with its dependencies automatically, specify the Teradata R package repository and CRAN in the repos argument for `install.packages`.
 ```
-Rscript -e "install.packages('tdplyr',repos=c('https://teradata-download.s3.amazonaws.com','https://cloud.r-project.org'))"
+Rscript -e "install.packages('tdplyr',repos=c('https://r-repo.teradata.com','https://cloud.r-project.org'))"
 ```
  
 ## Minimum System Requirements
