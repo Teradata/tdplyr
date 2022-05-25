@@ -51,7 +51,7 @@ Teradata Vantage:
 - Teradata Machine Learning Engine 08.00.03.00 or later versions
  
 Supported Drivers:
-- Teradata SQL Driver for R 17.0.0.8 (Recommended) or later versions
+- Teradata SQL Driver for R 17.10.0.10 (Recommended) or later versions
 - Teradata ODBC Driver (Deprecated)
  
 Operating Systems: (64-bit only)
@@ -62,6 +62,21 @@ Operating Systems: (64-bit only)
 - SLES/OpenSUSE 12
 
 ## Change Log
+
+#### tdplyr 17.0.0.2
+- Important notification:
+  Minimum teradatasql version required is 17.10.0.10 or later.
+- New Features/Functions
+    - Export data to csv file:
+        - `td_to_csv()`
+- Updates/Improvements
+    - New tdplyr option (`byom.install.location`):
+        - Users can specify which database BYOM is intalled in.
+        - `td_pmml_predict()` updated to use this option even if user is connected by default to a different database.
+- `td_fastexport()`
+    - Function enahnced to export data to CSV file.
+    - Arguments `field.separator` and `field.quote.char` can be used to specify the separator and quote character when exporting to CSV file.
+- Exporting data to CSV offers better performance than exporting to data.frame, while using `td_fastexport()` and `td_to_csv()`.
 
 #### tdplyr 17.0.0.1
 - Important Notification:
