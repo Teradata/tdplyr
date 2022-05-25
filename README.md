@@ -74,9 +74,9 @@ Operating Systems: (64-bit only)
         - Users can specify which database BYOM is intalled in.
         - `td_pmml_predict()` updated to use this option even if user is connected by default to a different database.
 - `td_fastexport()`
-    - Function enahnced to export data to CSV file.
+    - Function enahnced for better performance to export data to CSV file.
     - Arguments `field.separator` and `field.quote.char` can be used to specify the separator and quote character when exporting to CSV file.
-- Exporting data to CSV offers better performance than exporting to data.frame, while using `td_fastexport()` and `td_to_csv()`.
+- Note: Exporting data to CSV offers better performance than exporting to data.frame, while using `td_fastexport()` and `td_to_csv()`.
 
 #### tdplyr 17.0.0.1
 - Important Notification:
