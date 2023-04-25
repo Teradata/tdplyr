@@ -35,6 +35,9 @@ R package repository.
 The Teradata R package depends on `rlang`, `dplyr`, `dbplyr`, `DBI`, `magrittr`, `jsonlite`, `purrr`, `bit64` and `teradatasql`
 packages which are available from CRAN or Teradata's R package repository.
 
+> **Note**
+The latest Teradata R package v17.0.0.2 is incompatible with dbplyr v2.2.0 and above which has new updates that break tdplyr features. To use tdplyr, the version of dbplyr package must be 2.1.1. Install the compatible version dbplyr using the following command: `remotes::install_version("dbplyr", "2.1.1")`
+
 To download and install tdplyr along with its dependencies automatically, specify the Teradata R package repository and CRAN in the repos argument for `install.packages`.
 ```
 Rscript -e "install.packages('tdplyr',repos=c('https://r-repo.teradata.com','https://cloud.r-project.org'))"
