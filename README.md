@@ -35,14 +35,14 @@ R package repository.
 The Teradata R package depends on `rlang`, `dplyr`, `dbplyr`, `DBI`, `magrittr`, `jsonlite`, `purrr`, `bit64` and `teradatasql`
 packages which are available from CRAN or Teradata's R package repository.
 
-> **Note**
-The latest Teradata R package v17.0.0.2 is incompatible with dbplyr v2.2.0 and above which has new updates that break tdplyr features. To use tdplyr, the version of dbplyr package must be 2.1.1. Install the compatible version dbplyr using the following command: `remotes::install_version("dbplyr", "2.1.1")`
 
+> **Note**
+The latest Teradata R package v17.0.0.3 is now compatible with dbplyr v2.3.0 and above. To use tdplyr, the version of dbplyr package must be 2.3.0 or above. Install the compatible version dbplyr using the following command: `remotes::install_version("dbplyr", "2.3.0")`
 To download and install tdplyr along with its dependencies automatically, specify the Teradata R package repository and CRAN in the repos argument for `install.packages`.
 ```
 Rscript -e "install.packages('tdplyr',repos=c('https://r-repo.teradata.com','https://cloud.r-project.org'))"
 ```
- 
+
 ## Minimum System Requirements
 
 R: (64 bit only)
@@ -65,6 +65,23 @@ Operating Systems: (64-bit only)
 - SLES/OpenSUSE 12
 
 ## Change Log
+
+#### tdplyr 17.00.00.03
+- Important Notification:
+  tdplyr is now compatible with latest version of dbplyr 2.3.2.
+- New Features/Functions
+    - `attach_attributes()`: User can now attach attributes to the 'tbl' object using attach_atrributes().
+      The attributes attached are:
+       - databaseName - The name of the database in which the table exists.
+       - sourceDefinition - Name of the source of input i.e table name or sql query.
+       - sourceType - Type of input source i.e table or query.
+       - object - Full name of the table when source type is table, else NULL.
+       - baseQuery - Base Query for the tbl.
+       - columnDataType - DataTypes of the columns.
+       - columnNames - Names of the columns.
+- Bug Fixes
+  - td_fastload now uploads single column dataframe.
+
 
 #### tdplyr 17.0.0.2
 - Important notification:
