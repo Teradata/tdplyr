@@ -69,7 +69,6 @@ Operating Systems: (64-bit only)
 #### tdplyr 17.00.00.03
 - Important Notification:
   tdplyr is now compatible with latest version of dbplyr 2.3.2.
-  Minimum required version for dbplyr is 2.3.0.
 - New Features/Functions
     - `attach_attributes()`: User can now attach attributes to the 'tbl' object using attach_atrributes().
       The attributes attached are:
