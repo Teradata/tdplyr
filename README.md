@@ -63,7 +63,7 @@ Operating Systems: (64-bit only)
 
 ## Change Log
 
-#### tdplyr 17.00.00.03
+#### tdplyr 17.0.0.3
 - **Important Notification:**
    - tdplyr is now compatible with latest version of dbplyr 2.3.2.
    - Minimum teradatasql version required is 17.20.0.19 or later.
