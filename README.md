@@ -35,9 +35,6 @@ R package repository.
 The Teradata R package depends on `rlang`, `dplyr`, `dbplyr`, `DBI`, `magrittr`, `jsonlite`, `purrr`, `bit64` and `teradatasql`
 packages which are available from CRAN or Teradata's R package repository.
 
-
-> **Note**
-The latest Teradata R package v17.0.0.3 is now compatible with dbplyr v2.3.0 and above. To use tdplyr, the version of dbplyr package must be 2.3.0 or above. Install the compatible version dbplyr using the following command: `remotes::install_version("dbplyr", "2.3.0")`
 To download and install tdplyr along with its dependencies automatically, specify the Teradata R package repository and CRAN in the repos argument for `install.packages`.
 ```
 Rscript -e "install.packages('tdplyr',repos=c('https://r-repo.teradata.com','https://cloud.r-project.org'))"
@@ -54,7 +51,7 @@ Teradata Vantage:
 - Teradata Machine Learning Engine 08.00.03.00 or later versions
  
 Supported Drivers:
-- Teradata SQL Driver for R 17.10.0.10 (Recommended) or later versions
+- Teradata SQL Driver for R 17.20.0.19 (Recommended) or later versions
 - Teradata ODBC Driver (Deprecated)
  
 Operating Systems: (64-bit only)
@@ -67,10 +64,11 @@ Operating Systems: (64-bit only)
 ## Change Log
 
 #### tdplyr 17.00.00.03
-- Important Notification:
-  tdplyr is now compatible with latest version of dbplyr 2.3.2.
+- **Important Notification:**
+   - tdplyr is now compatible with latest version of dbplyr 2.3.2.
+   - Minimum teradatasql version required is 17.20.0.19 or later.
 - New Features/Functions
-    - `attach_attributes()`: User can now attach attributes to the 'tbl' object using attach_atrributes().
+    - `attach_attributes()`: User can now attach attributes to the 'tbl' object using attach_attributes().
       The attributes attached are:
        - databaseName - The name of the database in which the table exists.
        - sourceDefinition - Name of the source of input i.e table name or sql query.
