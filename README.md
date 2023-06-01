@@ -1,52 +1,13 @@
-# tdplyr - Teradata R Package
-
-## Overview
-
-The Teradata R package (tdplyr) combines the benefits of open source R language environment with the
-massive parallel processing capabilities of Teradata Vantage, which includes the Teradata Machine
-Learning Engine analytic functions and the Teradata NewSQL Engine in-database analytic functions.
-It allows users to develop and run R programs that take advantage of the Big Data and
-Machine Learning analytics capabilities of Vantage.
-
-This package interface makes available to R users a collection of functions for analytics that reside on
-Vantage, so that they can perform in-database analytics with no SQL coding required. Specifically, the
-Teradata R package provides functions for data manipulation and transformation, data filtering and sub-setting,
-on remote Teradata database table and can be used in conjunction with open source R capabilities. Moreover, 
-the Teradata R package conforms and works with the functions of the [dbplyr](https://cran.r-project.org/web/packages/dbplyr/index.html) package and 
-most of the verbs of the [dplyr](https://cran.r-project.org/web/packages/dplyr/index.html) package.
-
+Teradata R Package - tdplyr 17.00.00.00  
 Teradata Vantage Client R Analytic library  
 Copyright © 2018, Teradata. All Rights Reserved.
-
-For Teradata R package documentation, please visit [Teradata R Package Documentation](https://docs.teradata.com/search/books?filters=prodname~%2522Teradata+R+Package%2522)
-
-For Teradata customer support, please visit [Teradata Access](https://access.teradata.com) or email Analytic-Clients Support at <SA230577@teradata.com>.
-
-General product information is available in the [Teradata Documentation website](https://docs.teradata.com/)
+ 
+General product information is available in the Teradata Documentation website, https://docs.teradata.com/
 - Teradata R Package User Guide – B700-4005 
 - Teradata R Function Reference – B700-4007
-- Teradata&reg; Vantage Machine Learning Engine Analytic Function Reference - B700-4003
-- Teradata&reg; Database Analytic Functions - B035-1206
-
-## Installation
-The Teradata R package (tdplyr) contains proprietary code and cannot be offered on CRAN. It is available from Teradata's 
-R package repository. 
-
-The Teradata R package depends on `rlang`, `dplyr`, `dbplyr`, `DBI`, `magrittr`, `jsonlite`, `purrr`, `bit64` and `teradatasql`
-packages which are available from CRAN or Teradata's R package repository.
-
-> **Note**
-The latest Teradata R package v17.0.0.2 is incompatible with dbplyr v2.2.0 and above which has new updates that break tdplyr features. To use tdplyr, the version of dbplyr package must be 2.1.1. Install the compatible version dbplyr using the following command: `remotes::install_version("dbplyr", "2.1.1")`
-
-To download and install tdplyr along with its dependencies automatically, specify the Teradata R package repository and CRAN in the repos argument for `install.packages`.
-```
-Rscript -e "install.packages('tdplyr',repos=c('https://r-repo.teradata.com','https://cloud.r-project.org'))"
-```
  
-## Minimum System Requirements
-
-R: (64 bit only)
-- R v3.4.3 or later versions
+## Minimum System Requirements:
+------------------------------
 
 Teradata Vantage:
 - Vantage 1.0 - Maintenance Update 2 or later versions
@@ -54,8 +15,8 @@ Teradata Vantage:
 - Teradata Machine Learning Engine 08.00.03.00 or later versions
  
 Supported Drivers:
-- Teradata SQL Driver for R 17.10.0.10 (Recommended) or later versions
-- Teradata ODBC Driver (Deprecated)
+- Teradata SQL Driver 17.10.0.10 (Recommended)
+- Teradata ODBC Driver 16.20
  
 Operating Systems: (64-bit only)
 - Windows 7
@@ -63,31 +24,54 @@ Operating Systems: (64-bit only)
 - Ubuntu 16
 - RHEL 7
 - SLES/OpenSUSE 12
-
-## Change Log
-
-#### tdplyr 17.0.0.2
-- Important notification:
-  Minimum teradatasql version required is 17.10.0.10 or later.
+ 
+## Release Notes:
+---------------------------
+#### tdplyr 17.00.00.03
+- Important Notification:
+  tdplyr is now compatible with latest version of dbplyr 2.3.2.
 - New Features/Functions
-    - Export data to csv file:
+    - `attach_attributes()`: User can now attach attributes to the 'tbl' object using attach_atrributes().
+      The attributes attached are:
+       - databaseName - The name of the database in which the table exists.
+       - sourceDefinition - Name of the source of input i.e table name or sql query.
+       - sourceType - Type of input source i.e table or query.
+       - object - Full name of the table when source type is table, else NULL.
+       - baseQuery - Base Query for the tbl.
+       - columnDataType - DataTypes of the columns.
+       - columnNames - Names of the columns.
+- Bug Fixes
+  - td_fastload now uploads single column dataframe.
+
+
+#### tdplyr 17.00.00.02
+- Important Notification:
+  For tdplyr, minimum teradatasql version required is 17.10.0.10.
+- New Features/Functions
+    - Data Export: to_csv support is added:
         - `td_to_csv()`
 - Updates/Improvements
-    - New tdplyr option (`byom.install.location`):
-        - Users can specify which database BYOM is intalled in.
-        - `td_pmml_predict()` updated to use this option even if user is connected by default to a different database.
-- `td_fastexport()`
-    - Function enahnced for better performance to export data to CSV file.
-    - Arguments `field.separator` and `field.quote.char` can be used to specify the separator and quote character when exporting to CSV file.
-- Note: Exporting data to CSV offers better performance than exporting to data.frame, while using `td_fastexport()` and `td_to_csv()`.
+    - Newly added tdplyr options:
+        - tdplyr has added one new option that provide flexibility to the user
+          to point to the database where byom is intalled.
+		- User can use functions like td_pmml_predict() while being connected to another database.
+		- Following is the name of the option :
+            - `byom.install.location` -
+                Specifies the database where byom is installed.
+    - `td_fastexport()`
+        - Function allows the user to export the data to a CSV file.
+		- User can also use field.separator and field.quote.char to specify the separator and
+		  quote character to be used for writing the CSV file.
+	- Performance of exporting data to CSV, instead of data.frame is better, while using td_fastexport and td_to_csv.
 
-#### tdplyr 17.0.0.1
+#### tdplyr 17.00.00.01
 - Important Notification:
-  Minimum dbplyr version required is 2.0. tdplyr has been updated to support dbplyr version 2.0 or later.
+  For tdplyr, minimum dbplyr version required is 2.0. tdplyr has been updated 
+  to support dbplyr version 2.0 or later.
 - New Features/Functions
-    - Bring Your Own Models (BYOM): Vignette also available with scoring examples
+    - Bring Your Own Models (BYOM):
         - `td_pmml_predict()`
-    - Data Export: Added support for FastExport
+    - Data Export: FastExport support is added.
         - `td_fastexport()`
     - Vantage Analytic Library (VAL) Functions:
         - Association Rules
@@ -96,7 +80,7 @@ Operating Systems: (64-bit only)
             - `td_decision_tree_valib()`
             - `td_decision_tree_evaluator_valib()`
             - `td_decision_tree_predict_valib()`
-        - Descriptive Statistics
+        - Descriptive Statistics (HTML File Available with Introduction)
             - `td_adaptive_histogram_valib()`
             - `td_explore_valib()`
             - `td_frequency_valib()`
@@ -122,7 +106,7 @@ Operating Systems: (64-bit only)
             - `td_log_reg_predict_valib()`
         - Matrix Building
             - `td_matrix_valib()`
-        - Statistical Tests
+        - Statistical Tests (HTML File Available with Introduction)
             - `td_binomial_test_valib()`
             - `td_chi_square_test_valib()`
             - `td_ks_test_valib()`
@@ -132,7 +116,7 @@ Operating Systems: (64-bit only)
             - `td_xml_to_html_report_valib()`
         - Variable Transformation
             - `td_transform_valib()`
-            - Transformation Techniques to use with 'Transform'
+            - `Transformation Techniques to use with 'Transform'
                 - `tdBinning()`
                 - `tdDerive()`
                 - `tdFillNa()`
@@ -143,7 +127,8 @@ Operating Systems: (64-bit only)
                 - `tdSigmoid()`
                 - `tdZScore()`
         - Supporting Utilies/Functionality
-            - S3 Generic: `print()` - Allows user to print the output of any of the VAL function.
+            - S3 Generic: `print()` - 
+              Allows user to print the output of any of the VAL function.
             - View Underlying SQL:
                 - `show_query()` - Allows user to print the underlying SQL used 
                   for function execution using the output object.
@@ -173,8 +158,8 @@ Operating Systems: (64-bit only)
         - Function `td_setup_test_env()` is deprecated now. Use newly added
           sandbox container utility function `td_setup_sandbox_env()` instead.
 
-
-#### tdplyr 17.0.0.0
+    
+#### tdplyr 17.00.00.00
 - New Features/Functions
     - Model Cataloging - Functionality to catalog model metadata and related information in the Model Catalog.
         - `td_save_model()` - Save a tdplyr analytic function model.
@@ -238,71 +223,63 @@ The following ML Engine functions have new and/or updated arguments to support t
     - `td_svm_sparse_mle()`
     - `td_svm_sparse_predict_mle()`
     - `td_xgboost_predict_mle()`
-- Added support to use generic predict function for `td_adaboost_predict_mle()`. Now `td_adaboost_predict_mle` can be called using `predict(<td_adaboost_mle_obj>, ...)`.
+- Added support to use generic predict function for `td_adaboost_predict_mle()`. Now `td_adaboost_predict_mle()` can be called using `predict(<td_adaboost_mle_obj>, ...)`.
 
 #### tdplyr 16.20.00.05
 - Improvements
-    - Improved performance when using output of analytic functions as input to dplyr verbs or `copy_to`.
+    - Improved performance when using output of analytic functions as input to dplyr verbs or `copy_to()`.
     - Support added to load time series Primary Time Index (PTI) tables using `copy_to()`.
     - Added more examples and updated documentation for some APIs.
-- New features/functions
+- New Features/Functions
     - tdplyr in conjunction with Teradata SQL Driver for R supports integration with RStudio Connections Pane for exploring the data source once connection is established with Vantage. Please refer the [link](https://db.rstudio.com/rstudio/connections/) for more information about RStudio Connection Pane.
-    - `td_fastload()` - for high performance data loading of large amount of data into a table in Teradata Vantage.
-    - `td_sample()` - to sample proportion of data.
+    - `td_fastload()` - Enable high performance data loading of large amount of data into a table in Teradata Vantage.
+    - `td_sample()` - Sample proportion of data.
     - Time series functions
-        - `group_by_time()` - to group tbl_terdata object based on time.
-        - Time series aggregate functions - to perform aggregate operations on time series tbl_teradata objects grouped by time. Please refer the vignette `time_series_aggregates` for usage.
-            - `ts.bottom()`
-            - `ts.top()`
-            - `ts.first()`
-            - `ts.last()`
-            - `ts.mad()`
-            - `ts.median()`
-            - `ts.mode()`
-    - `summarise()` - to summarise the tbl_teradata object using both regular and time series aggregate operations.
-    - Added a new SQL translation function `as.Date()` which typecasts character data type column to SQL DATE data type column. Please refer the vignette `sql-translation` for usage.
-    - Added 10 new MLEngine analytic functions.
-        - `td_adaboost_mle`
-        - `td_adaboost_predict_mle`
-        - `td_glml1l2_mle`
-        - `td_glml1l2_predict_mle`
-        - `td_pos_tagger_mle`
-        - `td_text_chunker_mle`
-        - `td_text_classifier_evaluator_mle`
-        - `td_text_classifier_mle`
-        - `td_text_classifier_trainer_mle`
-        - `td_text_morph_mle`
+        - `group_by_time()` - Group the tbl_teradata based on time.
+        - Time series aggregate functions - Added new SQL translations to perform aggregate operations on time series objects of class "tbl_teradata" grouped by time. Please refer the vignette `time_series_aggregates` for usage.
+            - `ts.bottom()` - Calculate the smallest n values in a column.
+            - `ts.top()` - Calculate the largest n values in a column.
+            - `ts.first()` - Calculate the oldest value, determined by timecode, in a column.
+            - `ts.last()` - Calculate the newest value, determined by timecode, in a column.
+            - `ts.mad()` - Calculate the Median Absolute Deviation of the values in a column.
+            - `ts.median()` - Calculate the median of the values in a column.
+            - `ts.mode()` - Calculate the mode of the values in a column.
+    - `summarise()` - Summarise the tbl_teradata using both regular and time series aggregate operations.
+    - Added a new SQL translation function `as.Date()` which typecasts character data type column to SQL DATE data type column. SQL translations for two new character stringr functions - `str_detect()` and `str_replace_all()` are also added. Please refer the vignette `sql-translation` for usage.
+    - Added 10 new ML Engine analytic functions.
+        - `td_adaboost_mle()`
+        - `td_adaboost_predict_mle()`
+        - `td_glml1l2_mle()`
+        - `td_glml1l2_predict_mle()`
+        - `td_pos_tagger_mle()`
+        - `td_text_chunker_mle()`
+        - `td_text_classifier_evaluator_mle()`
+        - `td_text_classifier_mle()`
+        - `td_text_classifier_trainer_mle()`
+        - `td_text_morph_mle()`
 
 #### tdplyr 16.20.00.04
-- Added 4 new SQLEngine analytic functions, which will work only with Vantage 1.1.
-    - `td_antiselect_sqle`
-    - `td_pack_sqle`
-    - `td_string_similarity_sqle`
-    - `td_unpack_sqle`
+- Added 4 new SQL Engine analytic functions, which will work only with Vantage 1.1.
+    - `td_antiselect_sqle()`
+    - `td_pack_sqle()`
+    - `td_string_similarity_sqle()`
+    - `td_unpack_sqle()`
 
 #### tdplyr 16.20.00.03
-- Support for Teradata SQL driver for R has been added. Teradata recommends to use Teradata SQL driver for R with tdplyr. 
+- Support for Teradata SQL driver for R has been added. Teradata recommends to use Teradata SQL driver for R with tdplyr.
+- ODBC Driver with tdplyr will be deprecated. Warning message will be shown when ODBC driver is used to connect to Teradata Vantage. 
+- Support added to `td_create_context()`(connect to Teradata Vantage) to support different logon mechanisms with Teradata SQL Driver. Logon mechanisms supported are: TD2, LDAP, TDNEGO, KRB5(for Kerberos).
+- Below ML Engine functions have new arguments added and the new arguments will work only with Vantage 1.1 or later releases.
+    - `td_decision_forest_mle()`
+    - `td_decision_tree_mle()`
+    - `td_knn_mle()`
+    - `td_varmax_mle()`
 - Simplified procedure to install tdplyr package with its dependent packages including Teradata SQL driver for R.
-- Support added to td_create_context(connect to Teradata Vantage) to support different logon mechanisms with Teradata SQL Driver. Logon mechanisms supported are: TD2, LDAP, TDNEGO, KRB5(for Kerberos).
-- 11 new analytic function (9 for MLEngine and 2 for SQLEngine) wrappers have been added.
-- Below ML Engine analytic functions have new arguments added and the new arguments will work only with Teradata Vantage 1.1 or later releases.
-    - `td_decision_forest_mle`
-    - `td_decision_tree_mle`
-    - `td_knn_mle`
-    - `td_varmax_mle`
-
 
 #### tdplyr 16.20.00.02
-- 45 new Analytic functions added. The package now has 105 analytic functions(9 SQLEngine and 96 MLEngine functions)
+- 45 new MLEngine Analytic functions added. The package now has 105 analytic functions(9 SQLEngine and 96 MLEngine functions)
 - Enhanced copy_to function to have "append" option.
 - Updated analytic function names to contain information about the execution engine. Analytic function names will have "_sqle" or "_mle" extension in the function names.
-- Configurable aliases for Analytic functions
-
 
 #### tdplyr 16.20.00.01
-- Initial release of Teradata R package for analytics within Teradata Vantage
-- Provide compatibility with dplyr package verbs for a SQL-like grammar via R functions for data manipulation
-- Provides compatibility with dbplyr package which provides a database backend for R and enables using remote database tables as in-memory R data frames 
-- Supports connectivity to Teradata database using Teradata ODBC driver
-- Provides R interface to run MLEngine and SQLEngine analytic functions within Teradata Vantage
-- Support for 3 major OS Platforms(Windows/OSX/Linux)
+- tdplyr 16.20.00.01 is the first release version. Please refer to the Teradata R Package User Guide for a list of Limitations and Usage Considerations.
