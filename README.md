@@ -63,6 +63,15 @@ Operating Systems: (64-bit only)
 
 ## Change Log
 
+#### tdplyr 17.0.0.4
+- **Important Notification:**
+  - tdplyr is now compatible with `R 4.3.0`.
+  - Minimum teradatasql version required is 17.20.0.26 or later.
+- Bug Fixes
+  - VAL functions now raise appropriate error in case of failures.
+    For example, if there is no room in database or insufficient permissions.
+  - `cumsum()` and `row_number()` functions work with tdplyr 17.00.00.04.
+
 #### tdplyr 17.0.0.3
 - **Important Notification:**
    - tdplyr is now compatible with latest version of dbplyr 2.3.2.
