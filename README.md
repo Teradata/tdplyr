@@ -16,7 +16,7 @@ the Teradata R package conforms and works with the functions of the [dbplyr](htt
 most of the verbs of the [dplyr](https://cran.r-project.org/web/packages/dplyr/index.html) package.
 
 Teradata Vantage Client R Analytic library  
-Copyright © 2018, Teradata. All Rights Reserved.
+Copyright © 2024, Teradata. All Rights Reserved.
 
 For Teradata R package documentation, please visit [Teradata R Package Documentation](https://docs.teradata.com/search/books?filters=prodname~%2522Teradata+R+Package%2522)
 
@@ -43,7 +43,7 @@ Rscript -e "install.packages('tdplyr',repos=c('https://r-repo.teradata.com','htt
 ## Minimum System Requirements
 
 R: (64 bit only)
-- R v3.4.3 or later versions
+- R v3.6.3 or later versions
 
 Teradata Vantage:
 - Vantage 1.0 - Maintenance Update 2 or later versions
